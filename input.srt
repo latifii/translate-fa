@@ -1,0 +1,39 @@
+1
+00:00:00,690 --> 00:00:02,910
+So to update this state here
+
+2
+00:00:02,910 --> 00:00:04,320
+in handleAddGoal,
+
+3
+00:00:04,320 --> 00:00:08,490
+I'll use this function form for updating my state
+
+4
+00:00:08,490 --> 00:00:11,100
+because the state will be updated
+
+5
+00:00:11,100 --> 00:00:14,520
+based on the previous state snapshot.
+
+6
+00:00:14,520 --> 00:00:15,870
+And as you also learn
+
+7
+00:00:15,870 --> 00:00:18,630
+in my "React - The Complete Guide" course,
+
+8
+00:00:18,630 --> 00:00:21,750
+if your new state depends on the old state,
+
+9
+00:00:21,750 --> 00:00:24,600
+you should use this special function form
+
+10
+00:00:24,600 --> 00:00:26,700
+for updating the state.

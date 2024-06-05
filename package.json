@@ -1,0 +1,14 @@
+{
+  "type": "module",
+  "name": "translate-fa",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@vitalets/google-translate-api": "^9.2.0",
+    "google-translate-api": "^2.3.0",
+    "subtitles-parser": "^0.0.2"
+  }
+}
