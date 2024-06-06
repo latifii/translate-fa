@@ -1,0 +1,96 @@
+1
+00:00:00,660 --> 00:00:01,920
+So now that we covered
+
+2
+00:00:01,920 --> 00:00:04,650
+some crucial TypeScript essentials,
+
+3
+00:00:04,650 --> 00:00:08,403
+let's get started with connecting TypeScript to @React.@
+
+4
+00:00:09,270 --> 00:00:11,400
+And for that, in this section
+
+5
+00:00:11,400 --> 00:00:15,000
+we're going to build a basic demo project,
+
+6
+00:00:15,000 --> 00:00:17,220
+which allows you to set and manage
+
+7
+00:00:17,220 --> 00:00:20,040
+the goals you have for this course.
+
+8
+00:00:20,040 --> 00:00:23,400
+And it's this demo project that will allow us
+
+9
+00:00:23,400 --> 00:00:27,630
+to dive into all those essential, crucial concepts
+
+10
+00:00:27,630 --> 00:00:30,750
+you must know no matter which @React@ app
+
+11
+00:00:30,750 --> 00:00:33,330
+you're building with TypeScript.
+
+12
+00:00:33,330 --> 00:00:36,960
+And therefore, in this section we'll explore
+
+13
+00:00:36,960 --> 00:00:41,820
+how to work with components and @props@ and TypeScript.
+
+14
+00:00:41,820 --> 00:00:44,610
+We'll take a look at how we can handle events
+
+15
+00:00:44,610 --> 00:00:47,130
+when using @React@ with TypeScript,
+
+16
+00:00:47,130 --> 00:00:49,530
+and of course, very important
+
+17
+00:00:49,530 --> 00:00:52,410
+also how we can deal with @state.@
+
+18
+00:00:52,410 --> 00:00:53,940
+Last but not least,
+
+19
+00:00:53,940 --> 00:00:57,090
+we'll also explore how we can get user input
+
+20
+00:00:57,090 --> 00:00:59,880
+with help of @forms@ and @refs.@
+
+21
+00:00:59,880 --> 00:01:02,370
+And therefore, by the end of this section
+
+22
+00:01:02,370 --> 00:01:06,570
+you'll have a solid @React@ and TypeScript foundation
+
+23
+00:01:06,570 --> 00:01:09,240
+and you'll be ready to dive into more advanced
+
+24
+00:01:09,240 --> 00:01:12,003
+@React@ and TypeScript features thereafter.
+

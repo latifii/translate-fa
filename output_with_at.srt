@@ -1,6 +1,6 @@
 1
 00:00:00,690 --> 00:00:02,910
-So to update this state here
+So to update this @state@ here
 
 2
 00:00:02,910 --> 00:00:04,320
@@ -8,15 +8,15 @@ in handleAddGoal,
 
 3
 00:00:04,320 --> 00:00:08,490
-I'll use this function form for updating my state
+I'll use this @function@ form for updating my @state@
 
 4
 00:00:08,490 --> 00:00:11,100
-because the state will be updated
+because the @state@ will be updated
 
 5
 00:00:11,100 --> 00:00:14,520
-based on the previous state snapshot.
+based on the previous @state@ snapshot.
 
 6
 00:00:14,520 --> 00:00:15,870
@@ -28,15 +28,15 @@ in my "React - The Complete Guide" course,
 
 8
 00:00:18,630 --> 00:00:21,750
-if your new state depends on the old state,
+if your new @state@ depends on the old @state@,
 
 9
 00:00:21,750 --> 00:00:24,600
-you should use this special function form
+you should use this special @function@ form
 
 10
 00:00:24,600 --> 00:00:26,700
-for updating the state.
+for updating the @state@.
 
 11
 00:00:26,700 --> 00:00:28,470
@@ -44,19 +44,19 @@ Because here you'll automatically
 
 12
 00:00:28,470 --> 00:00:32,549
-get your previous state snapshot at the point of time
+get your previous @state@ snapshot at the point of time
 
 13
 00:00:32,549 --> 00:00:34,838
-where this state updating function here
+where this @state@ updating @function@ here
 
 14
 00:00:34,838 --> 00:00:36,963
-is executed by React.
+is executed by @React@.
 
 15
 00:00:37,920 --> 00:00:40,470
-And then here in this function body,
+And then here in this @function@ body,
 
 16
 00:00:40,470 --> 00:00:44,790
@@ -164,7 +164,7 @@ which is good enough for this demo project,
 
 42
 00:02:03,660 --> 00:02:08,660
-set the title to Learn React + TypeScript in this case,
+set the title to Learn @React@ + TypeScript in this case,
 
 43
 00:02:09,990 --> 00:02:12,690
@@ -196,7 +196,7 @@ which is added here in my case,
 
 50
 00:02:30,030 --> 00:02:34,260
-at the end of this returned new state snapshot,
+at the end of this returned new @state@ snapshot,
 
 51
 00:02:34,260 --> 00:02:36,600
@@ -220,7 +220,7 @@ And that of course works just as you know it.
 
 56
 00:02:51,960 --> 00:02:55,590
-We can use this goals state, and then the map method
+We can use this goals @state@, and then the map method
 
 57
 00:02:55,590 --> 00:02:59,250
@@ -236,7 +236,7 @@ for example.
 
 60
 00:03:03,810 --> 00:03:06,630
-And for that we pass a function to map
+And for that we pass a @function@ to map
 
 61
 00:03:06,630 --> 00:03:09,780
@@ -292,7 +292,7 @@ and it understands that this goal,
 
 74
 00:03:51,060 --> 00:03:55,290
-which we get as a parameter in this function here,
+which we get as a parameter in this @function@ here,
 
 75
 00:03:55,290 --> 00:03:57,370
@@ -304,7 +304,7 @@ because TypeScript understands
 
 77
 00:04:00,090 --> 00:04:04,260
-that this function here will be executed for us
+that this @function@ here will be executed for us
 
 78
 00:04:04,260 --> 00:04:06,570
@@ -384,11 +384,11 @@ And then on the list item,
 
 97
 00:05:02,370 --> 00:05:04,680
-also add the special key prop
+also add the special key @prop@
 
 98
 00:05:04,680 --> 00:05:08,280
-which React once when outputting such a list,
+which @React@ once when outputting such a list,
 
 99
 00:05:08,280 --> 00:05:11,433
@@ -445,3 +445,4 @@ and how we can make sure that TypeScript understands
 112
 00:05:45,000 --> 00:05:47,733
 which type of value we wanna manage here.
+

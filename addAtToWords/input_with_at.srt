@@ -1,0 +1,508 @@
+1
+00:00:00,810 --> 00:00:02,310
+Okay, at this point,
+
+2
+00:00:02,310 --> 00:00:06,420
+we really spent a lot of time on components and props,
+
+3
+00:00:06,420 --> 00:00:07,920
+it's time to move on.
+
+4
+00:00:07,920 --> 00:00:12,920
+And which other React concept is extremely important,
+
+5
+00:00:12,960 --> 00:00:17,103
+and is getting used in pretty much all React apps?
+
+6
+00:00:18,060 --> 00:00:19,020
+State.
+
+7
+00:00:19,020 --> 00:00:20,970
+Because whilst components
+
+8
+00:00:20,970 --> 00:00:23,880
+are those reusable building blocks,
+
+9
+00:00:23,880 --> 00:00:27,000
+state is what makes a React application
+
+10
+00:00:27,000 --> 00:00:29,850
+truly dynamic and interactive,
+
+11
+00:00:29,850 --> 00:00:32,850
+because state is the thing that, in the end,
+
+12
+00:00:32,850 --> 00:00:36,000
+leads to different UIs being rendered,
+
+13
+00:00:36,000 --> 00:00:39,780
+for example, in response to button clicks.
+
+14
+00:00:39,780 --> 00:00:44,370
+And speaking of that, here I will add a button,
+
+15
+00:00:44,370 --> 00:00:47,070
+and we'll later add a complete form,
+
+16
+00:00:47,070 --> 00:00:49,770
+but for the moment, it's just a button,
+
+17
+00:00:49,770 --> 00:00:52,143
+where I'll say Add Goal.
+
+18
+00:00:53,160 --> 00:00:55,740
+And, of course, the goal now is to add a new goal
+
+19
+00:00:55,740 --> 00:00:57,840
+whenever this button is clicked.
+
+20
+00:00:57,840 --> 00:01:01,770
+At the moment, with some predefined dummy data,
+
+21
+00:01:01,770 --> 00:01:04,143
+later, with custom data.
+
+22
+00:01:05,340 --> 00:01:07,350
+So, in order to make this happen,
+
+23
+00:01:07,350 --> 00:01:11,580
+I'll start by adding a nested function in the App function,
+
+24
+00:01:11,580 --> 00:01:13,863
+which I'll name handleAddGoal.
+
+25
+00:01:15,540 --> 00:01:18,990
+The name is up to you, but this is a common convention
+
+26
+00:01:18,990 --> 00:01:21,690
+for naming your event handler functions,
+
+27
+00:01:21,690 --> 00:01:25,890
+so, functions that should be triggered upon some event.
+
+28
+00:01:25,890 --> 00:01:29,340
+An alternative would be addGoalHandler,
+
+29
+00:01:29,340 --> 00:01:31,110
+you also see that a lot.
+
+30
+00:01:31,110 --> 00:01:33,270
+And in the end, the name is up to you,
+
+31
+00:01:33,270 --> 00:01:36,960
+it just should describe what the function does.
+
+32
+00:01:36,960 --> 00:01:41,610
+And here, the goal is to dynamically add more and more goals
+
+33
+00:01:41,610 --> 00:01:42,543
+to this app.
+
+34
+00:01:43,410 --> 00:01:47,550
+So, therefore, I'll add the onClick prop to this button,
+
+35
+00:01:47,550 --> 00:01:49,350
+the built-In onClick prop,
+
+36
+00:01:49,350 --> 00:01:52,530
+and point at handleAddGoal here,
+
+37
+00:01:52,530 --> 00:01:54,600
+so that this function is triggered
+
+38
+00:01:54,600 --> 00:01:56,583
+whenever this button here is pressed.
+
+39
+00:01:57,900 --> 00:02:00,660
+And in here, I now want to generate new goals,
+
+40
+00:02:00,660 --> 00:02:03,300
+and then dynamically output them on the screen.
+
+41
+00:02:03,300 --> 00:02:06,153
+And for that, as mentioned, we'll need state.
+
+42
+00:02:06,990 --> 00:02:10,800
+And we can register some state here in this App component,
+
+43
+00:02:10,800 --> 00:02:15,600
+of course, with help of the built-in useState hook,
+
+44
+00:02:15,600 --> 00:02:17,970
+which must be imported from React,
+
+45
+00:02:17,970 --> 00:02:20,940
+and which is now not just some type,
+
+46
+00:02:20,940 --> 00:02:24,093
+but instead a real function that we can execute.
+
+47
+00:02:25,080 --> 00:02:26,040
+Now, as you know,
+
+48
+00:02:26,040 --> 00:02:30,840
+useState returns an array with exactly two elements,
+
+49
+00:02:30,840 --> 00:02:34,290
+and the first element is the current state snapshot
+
+50
+00:02:34,290 --> 00:02:38,250
+for this current function execution cycle,
+
+51
+00:02:38,250 --> 00:02:41,220
+the second element is a function we can call
+
+52
+00:02:41,220 --> 00:02:43,503
+to update that state snapshot,
+
+53
+00:02:44,340 --> 00:02:47,310
+and to trigger this component function
+
+54
+00:02:47,310 --> 00:02:50,160
+to be executed again, therefore,
+
+55
+00:02:50,160 --> 00:02:52,053
+because that's how React works.
+
+56
+00:02:53,700 --> 00:02:55,500
+So, here, I wanna manage some goals,
+
+57
+00:02:55,500 --> 00:03:00,000
+and therefore my initial state could be an empty array.
+
+58
+00:03:00,000 --> 00:03:02,460
+And then here, in handleAddGoal,
+
+59
+00:03:02,460 --> 00:03:05,700
+we can add the logic for manipulating this array
+
+60
+00:03:05,700 --> 00:03:07,500
+with help of setGoals.
+
+61
+00:03:07,500 --> 00:03:09,210
+But before we do that,
+
+62
+00:03:09,210 --> 00:03:13,500
+there's one important problem we should solve,
+
+63
+00:03:13,500 --> 00:03:16,863
+or one improvement we should make here.
+
+64
+00:03:17,880 --> 00:03:21,030
+If we hover over goals, we see the type of that,
+
+65
+00:03:21,030 --> 00:03:24,590
+and at the moment, it's never array,
+
+66
+00:03:24,590 --> 00:03:28,410
+an array of nevers, which sounds pretty weird.
+
+67
+00:03:28,410 --> 00:03:29,493
+What does this mean?
+
+68
+00:03:30,840 --> 00:03:33,990
+In the end, that TypeScript's way of expressing
+
+69
+00:03:33,990 --> 00:03:38,990
+that this here is an array of unknown types,
+
+70
+00:03:40,350 --> 00:03:43,470
+and therefore we'll actually also never be able
+
+71
+00:03:43,470 --> 00:03:45,060
+to tweak this,
+
+72
+00:03:45,060 --> 00:03:46,470
+because if I, for example,
+
+73
+00:03:46,470 --> 00:03:50,460
+try to set goals to an array of numbers, I get an error,
+
+74
+00:03:50,460 --> 00:03:53,580
+because I haven't defined which types of values
+
+75
+00:03:53,580 --> 00:03:55,440
+should be allowed in this array
+
+76
+00:03:55,440 --> 00:03:58,380
+when I initialized the state.
+
+77
+00:03:58,380 --> 00:04:01,920
+So, the general problem which we have to solve here
+
+78
+00:04:01,920 --> 00:04:05,910
+simply is, that when using React with TypeScript,
+
+79
+00:04:05,910 --> 00:04:09,750
+and when using useState in such projects,
+
+80
+00:04:09,750 --> 00:04:14,040
+we have to tell React which type of value
+
+81
+00:04:14,040 --> 00:04:17,640
+we're going to manage with useState.
+
+82
+00:04:17,640 --> 00:04:20,700
+Sometimes, it's able to infer this.
+
+83
+00:04:20,700 --> 00:04:24,810
+If we would set this to some initial text, for example,
+
+84
+00:04:24,810 --> 00:04:27,903
+it would then infer that goals is of type string.
+
+85
+00:04:28,830 --> 00:04:33,240
+But for more complex types, like arrays,
+
+86
+00:04:33,240 --> 00:04:35,220
+which is, as you learned in the end,
+
+87
+00:04:35,220 --> 00:04:37,500
+a connection of multiple types,
+
+88
+00:04:37,500 --> 00:04:40,890
+the array, and then the type of value in the array,
+
+89
+00:04:40,890 --> 00:04:43,410
+in such cases, TypeScript, of course,
+
+90
+00:04:43,410 --> 00:04:45,453
+is not able to infer anything.
+
+91
+00:04:46,290 --> 00:04:50,010
+That's why useState is a generic function,
+
+92
+00:04:50,010 --> 00:04:53,220
+and allows us to add these angle brackets
+
+93
+00:04:53,220 --> 00:04:56,220
+to pass this extra type information
+
+94
+00:04:56,220 --> 00:04:59,130
+between those angle brackets.
+
+95
+00:04:59,130 --> 00:05:01,470
+So, in case of useState,
+
+96
+00:05:01,470 --> 00:05:05,430
+we can use these angle brackets to set the type of value
+
+97
+00:05:05,430 --> 00:05:08,910
+that will eventually be managed by that state.
+
+98
+00:05:08,910 --> 00:05:10,590
+And here, we can make it clear
+
+99
+00:05:10,590 --> 00:05:13,950
+that this should be an array of course goals,
+
+100
+00:05:13,950 --> 00:05:15,030
+which, in the end,
+
+101
+00:05:15,030 --> 00:05:18,660
+should be objects with a title and a description,
+
+102
+00:05:18,660 --> 00:05:20,820
+and maybe also an ID,
+
+103
+00:05:20,820 --> 00:05:23,253
+which we'll need later for deleting them.
+
+104
+00:05:24,300 --> 00:05:28,866
+That's why I will add a new type here, CourseGoal,
+
+105
+00:05:28,866 --> 00:05:33,300
+which will have a title of type string,
+
+106
+00:05:33,300 --> 00:05:36,780
+and a description of type string,
+
+107
+00:05:36,780 --> 00:05:40,653
+and then also, let's say, an ID of type number, maybe.
+
+108
+00:05:42,240 --> 00:05:44,640
+And with that type defined here,
+
+109
+00:05:44,640 --> 00:05:46,350
+between those angle brackets,
+
+110
+00:05:46,350 --> 00:05:49,170
+we can say that the state we want to manage here
+
+111
+00:05:49,170 --> 00:05:52,170
+should be an array of CourseGoals.
+
+112
+00:05:52,170 --> 00:05:53,100
+And, as you learned,
+
+113
+00:05:53,100 --> 00:05:55,080
+that's the syntax for defining
+
+114
+00:05:55,080 --> 00:05:58,173
+that you want to have an array of a certain value.
+
+115
+00:05:59,430 --> 00:06:01,320
+The alternative would be to use
+
+116
+00:06:01,320 --> 00:06:03,333
+the built-in generic Array type.
+
+117
+00:06:05,130 --> 00:06:07,410
+One of the two must be used here,
+
+118
+00:06:07,410 --> 00:06:11,190
+and with that, setting our goals to an array of numbers,
+
+119
+00:06:11,190 --> 00:06:13,230
+of course, will fail,
+
+120
+00:06:13,230 --> 00:06:15,630
+but now goals, on the other hand,
+
+121
+00:06:15,630 --> 00:06:18,900
+is inferred to be of the correct type,
+
+122
+00:06:18,900 --> 00:06:22,650
+and that now allows us to update the type accordingly,
+
+123
+00:06:22,650 --> 00:06:25,770
+as long as we do it in a correct way.
+
+124
+00:06:25,770 --> 00:06:29,580
+So, as long as we make sure that goals ends up
+
+125
+00:06:29,580 --> 00:06:32,910
+being such an array of CourseGoals.
+
+126
+00:06:32,910 --> 00:06:35,580
+And that's therefore now how we should write the code
+
+127
+00:06:35,580 --> 00:06:37,893
+in this handleAddGoal function.
+

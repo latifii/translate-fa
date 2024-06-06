@@ -1,14 +1,19 @@
 {
-  "type": "module",
+  "type": "commonjs",
   "name": "translate-fa",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "translate_google.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node translate_google.js",
+    "addAt": "node addAtToWords/addAtToWords.js",
+    "removeAt": "node removeAtFromWords/removeAtFromWords.js"
   },
   "dependencies": {
+    "@iamtraction/google-translate": "^2.0.1",
     "@vitalets/google-translate-api": "^9.2.0",
+    "at": "^0.0.1-security",
     "google-translate-api": "^2.3.0",
+    "mstranslator": "^3.0.0",
     "subtitles-parser": "^0.0.2"
   }
 }
