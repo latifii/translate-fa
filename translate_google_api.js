@@ -4,7 +4,6 @@ const translate = require("@iamtraction/google-translate");
 const inputFile = "/input.srt";
 const outputFile = "/output.srt";
 
-// تابعی برای خواندن فایل SRT
 const readSrtFile = (filePath) => {
   return new Promise((resolve, reject) => {
     fs.readFile(filePath, "utf8", (err, data) => {
@@ -14,7 +13,6 @@ const readSrtFile = (filePath) => {
   });
 };
 
-// تابعی برای نوشتن فایل SRT
 const writeSrtFile = (filePath, data) => {
   return new Promise((resolve, reject) => {
     fs.writeFile(filePath, data, "utf8", (err) => {
@@ -24,7 +22,6 @@ const writeSrtFile = (filePath, data) => {
   });
 };
 
-// تابعی برای ترجمه محتویات SRT
 const translateSrt = async (content) => {
   const lines = content.split("\n");
   const translatedLines = [];
@@ -44,7 +41,6 @@ const translateSrt = async (content) => {
   return translatedLines.join("\n");
 };
 
-// تابع اصلی برای خواندن، ترجمه و نوشتن فایل SRT
 const processSrtFile = async (inputFile, outputFile) => {
   try {
     const content = await readSrtFile(inputFile);
@@ -56,5 +52,4 @@ const processSrtFile = async (inputFile, outputFile) => {
   }
 };
 
-// اجرای فرآیند
 processSrtFile(inputFile, outputFile);

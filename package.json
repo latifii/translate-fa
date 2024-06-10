@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "main": "translate_google.js",
   "scripts": {
-    "start": "node translate_google.js",
+    "start": "node translate_google_api.js",
     "addAt": "node addAtToWords/addAtToWords.js",
     "removeAt": "node removeAtFromWords/removeAtFromWords.js"
   },

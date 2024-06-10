@@ -1,96 +1,548 @@
 1
-00:00:00,660 --> 00:00:01,920
-So now that we covered
+00:00:00,000 --> 00:00:02,291
+[Maximilian Schwarzmüller] So we're able
 
 2
-00:00:01,920 --> 00:00:04,650
-some crucial TypeScript essentials,
+00:00:02,291 --> 00:00:04,260
+to fetch our posts here.
 
 3
-00:00:04,650 --> 00:00:08,403
-let's get started with connecting TypeScript to @React.@
+00:00:04,260 --> 00:00:06,060
+But of course, in reality
 
 4
-00:00:09,270 --> 00:00:11,400
-And for that, in this section
+00:00:06,060 --> 00:00:09,690
+this is not always going to be super fast.
 
 5
-00:00:11,400 --> 00:00:15,000
-we're going to build a basic demo project,
+00:00:09,690 --> 00:00:12,360
+We might need to wait for our backend
 
 6
-00:00:15,000 --> 00:00:17,220
-which allows you to set and manage
+00:00:12,360 --> 00:00:15,000
+for a couple of milliseconds or seconds
 
 7
-00:00:17,220 --> 00:00:20,040
-the goals you have for this course.
+00:00:15,000 --> 00:00:16,770
+and therefore we might want to show
 
 8
-00:00:20,040 --> 00:00:23,400
-And it's this demo project that will allow us
+00:00:16,770 --> 00:00:19,710
+some loading fallback text
 
 9
-00:00:23,400 --> 00:00:27,630
-to dive into all those essential, crucial concepts
+00:00:19,710 --> 00:00:22,500
+whilst we're waiting for a response.
 
 10
-00:00:27,630 --> 00:00:30,750
-you must know no matter which @React@ app
+00:00:22,500 --> 00:00:25,290
+And of course things can also go wrong.
 
 11
-00:00:30,750 --> 00:00:33,330
-you're building with TypeScript.
+00:00:25,290 --> 00:00:28,743
+And I want to @handle@ these two scenarios as well, therefore.
 
 12
-00:00:33,330 --> 00:00:36,960
-And therefore, in this section we'll explore
+00:00:29,760 --> 00:00:32,340
+Now let's start with the loading @state@.
 
 13
-00:00:36,960 --> 00:00:41,820
-how to work with components and @props@ and TypeScript.
+00:00:32,340 --> 00:00:33,360
+To @handle@ that,
 
 14
-00:00:41,820 --> 00:00:44,610
-We'll take a look at how we can handle events
+00:00:33,360 --> 00:00:36,483
+we can add a new @state@ to that @component@,
 
 15
-00:00:44,610 --> 00:00:47,130
-when using @React@ with TypeScript,
+00:00:37,320 --> 00:00:40,830
+a new @state@ with help of the useState @hook@ of course,
 
 16
-00:00:47,130 --> 00:00:49,530
-and of course, very important
+00:00:40,830 --> 00:00:43,491
+which is our isFetching @state@,
 
 17
-00:00:49,530 --> 00:00:52,410
-also how we can deal with @state.@
+00:00:43,491 --> 00:00:45,663
+which we update with setIsFetching.
 
 18
-00:00:52,410 --> 00:00:53,940
-Last but not least,
+00:00:48,030 --> 00:00:50,043
+And initially that should be @false@,
 
 19
-00:00:53,940 --> 00:00:57,090
-we'll also explore how we can get user input
+00:00:51,390 --> 00:00:54,960
+but of course here inside of fetchPosts
 
 20
-00:00:57,090 --> 00:00:59,880
-with help of @forms@ and @refs.@
+00:00:54,960 --> 00:00:56,730
+in that @effect@ @function@,
 
 21
-00:00:59,880 --> 00:01:02,370
-And therefore, by the end of this section
+00:00:56,730 --> 00:00:59,860
+right at the start, we wanna call setIsFetching
 
 22
-00:01:02,370 --> 00:01:06,570
-you'll have a solid @React@ and TypeScript foundation
+00:01:01,290 --> 00:01:02,940
+and set that to @true@
 
 23
-00:01:06,570 --> 00:01:09,240
-and you'll be ready to dive into more advanced
+00:01:02,940 --> 00:01:04,940
+because we're sending that request here.
 
 24
-00:01:09,240 --> 00:01:12,003
-@React@ and TypeScript features thereafter.
+00:01:06,450 --> 00:01:09,430
+Of course, we then also wanna setIsFetching
+
+25
+00:01:10,470 --> 00:01:13,443
+back to @false@ once we're done here at the end.
+
+26
+00:01:16,050 --> 00:01:18,902
+And then with setIsFetching being called
+
+27
+00:01:18,902 --> 00:01:21,630
+and being set to @true@ or @false@,
+
+28
+00:01:21,630 --> 00:01:23,910
+we can go to the @component@ @function@
+
+29
+00:01:23,910 --> 00:01:28,910
+and change the @value@ of content if we're currently fetching.
+
+30
+00:01:29,340 --> 00:01:34,340
+So we can check if isFetching is @true@,
+
+31
+00:01:34,620 --> 00:01:39,270
+and in that case set content equal to a paragraph
+
+32
+00:01:39,270 --> 00:01:42,600
+with an @id@ of loading dash fallback
+
+33
+00:01:42,600 --> 00:01:45,843
+because I prepared some styles for that @id@.
+
+34
+00:01:46,890 --> 00:01:50,763
+And here we could then say fetchingPosts dot, dot dot.
+
+35
+00:01:53,730 --> 00:01:57,900
+And we can see this in @action@ if we go back to our page
+
+36
+00:01:57,900 --> 00:02:01,050
+and open the developer tools.
+
+37
+00:02:01,050 --> 00:02:04,323
+And then there, if you go to the network tab,
+
+38
+00:02:05,430 --> 00:02:08,910
+because there in Chrome you can throttle the network
+
+39
+00:02:08,910 --> 00:02:11,163
+and simulate a slower network.
+
+40
+00:02:12,300 --> 00:02:15,333
+For example, by simulating slow 3G.
+
+41
+00:02:16,770 --> 00:02:19,320
+If you do that and you then reload,
+
+42
+00:02:19,320 --> 00:02:21,826
+it will take some time to fetch that @data@
+
+43
+00:02:21,826 --> 00:02:24,990
+because during development all these code files
+
+44
+00:02:24,990 --> 00:02:27,810
+are extremely big and not optimized.
+
+45
+00:02:27,810 --> 00:02:31,420
+But then you'll see that fetching post text at least briefly
+
+46
+00:02:32,910 --> 00:02:36,363
+and with that, I'll disable throttling.
+
+47
+00:02:37,890 --> 00:02:42,420
+But this loading text therefore is shown as intended.
+
+48
+00:02:42,420 --> 00:02:45,000
+Now to conclude this example,
+
+49
+00:02:45,000 --> 00:02:48,300
+I also want to implement error handling
+
+50
+00:02:48,300 --> 00:02:50,790
+so that if sending this request fails,
+
+51
+00:02:50,790 --> 00:02:52,680
+the app doesn't simply break,
+
+52
+00:02:52,680 --> 00:02:56,073
+but we instead shows error message to the user.
+
+53
+00:02:57,570 --> 00:03:00,450
+Now since we're using this utility @function@,
+
+54
+00:03:00,450 --> 00:03:05,220
+which will throw an error if we get back an error response,
+
+55
+00:03:05,220 --> 00:03:09,690
+all we have to do is wrap this get call here
+
+56
+00:03:09,690 --> 00:03:11,913
+into a try catch block,
+
+57
+00:03:14,730 --> 00:03:17,253
+like this where we catch an error.
+
+58
+00:03:18,930 --> 00:03:20,867
+Of course the code that depends
+
+59
+00:03:20,867 --> 00:03:24,090
+on the success of this fetch request
+
+60
+00:03:24,090 --> 00:03:28,110
+also should go into the tri block now though.
+
+61
+00:03:28,110 --> 00:03:31,230
+So here where we update the fetched posts
+
+62
+00:03:31,230 --> 00:03:33,063
+that should also go in there.
+
+63
+00:03:34,620 --> 00:03:38,460
+This code here where we set isFetching back to @false@,
+
+64
+00:03:38,460 --> 00:03:42,000
+should however, stay outside of the try-catch block
+
+65
+00:03:42,000 --> 00:03:45,120
+because no matter if we got an error or not,
+
+66
+00:03:45,120 --> 00:03:47,130
+we're not fetching anymore.
+
+67
+00:03:47,130 --> 00:03:50,403
+Therefore this should definitely be set to @false@ again.
+
+68
+00:03:52,650 --> 00:03:54,600
+And it's now here in the catch block
+
+69
+00:03:54,600 --> 00:03:56,793
+where the error should be handled.
+
+70
+00:03:58,200 --> 00:04:03,200
+For this we can add a third @state@, an error @state@,
+
+71
+00:04:05,190 --> 00:04:10,190
+which I'll name error and setError @state@ updating @function@.
+
+72
+00:04:12,570 --> 00:04:16,800
+And this should eventually be a @string@, or @undefined@,
+
+73
+00:04:16,800 --> 00:04:18,483
+which is the initial @value@.
+
+74
+00:04:21,570 --> 00:04:24,180
+And then here in the catch block,
+
+75
+00:04:24,180 --> 00:04:28,750
+we can set this error @state@ by calling set error
+
+76
+00:04:29,940 --> 00:04:34,830
+and we can set it to a message like failed to fetch posts
+
+77
+00:04:34,830 --> 00:04:35,663
+like this.
+
+78
+00:04:38,400 --> 00:04:40,350
+We could also use the message
+
+79
+00:04:40,350 --> 00:04:42,630
+of the error that's being thrown.
+
+80
+00:04:42,630 --> 00:04:45,000
+So for example of this error
+
+81
+00:04:45,000 --> 00:04:47,913
+where the message would be failed to fetch @data@.
+
+82
+00:04:48,900 --> 00:04:52,104
+Now for that we have to access this error @object@
+
+83
+00:04:52,104 --> 00:04:54,660
+that's being caught here
+
+84
+00:04:54,660 --> 00:04:58,470
+and use that in our set error @state@ updating call.
+
+85
+00:04:58,470 --> 00:05:01,323
+And for example, set this to error.message.
+
+86
+00:05:02,820 --> 00:05:06,270
+The problem with that just is that error by default
+
+87
+00:05:06,270 --> 00:05:07,800
+is of @type@ unknown
+
+88
+00:05:07,800 --> 00:05:11,520
+because @TypeScript@ doesn't know what it's catching here.
+
+89
+00:05:11,520 --> 00:05:15,720
+In JavaScript, you can throw anything as an error
+
+90
+00:05:15,720 --> 00:05:18,993
+including @numbers@, strings, anything.
+
+91
+00:05:19,890 --> 00:05:21,630
+So @TypeScript@ doesn't know
+
+92
+00:05:21,630 --> 00:05:24,510
+what @type@ of @value@ it will get here
+
+93
+00:05:24,510 --> 00:05:27,930
+and therefore we either have to add some checks here
+
+94
+00:05:27,930 --> 00:05:32,610
+and check if error, for example has a certain @property@
+
+95
+00:05:32,610 --> 00:05:36,880
+or if the @type@ of error, for example
+
+96
+00:05:37,913 --> 00:05:40,110
+is @string@ or something like this.
+
+97
+00:05:40,110 --> 00:05:41,670
+We can do all of that,
+
+98
+00:05:41,670 --> 00:05:43,620
+but for this application here,
+
+99
+00:05:43,620 --> 00:05:47,370
+we know that it will be an error @object@.
+
+100
+00:05:47,370 --> 00:05:51,300
+Therefore we can also just use @type@ casting here
+
+101
+00:05:51,300 --> 00:05:55,143
+and tell @TypeScript@ that this will be of @type@ error.
+
+102
+00:05:57,390 --> 00:06:00,960
+Alternatively, and a bit cleaner,
+
+103
+00:06:00,960 --> 00:06:04,320
+we could add an if check and check if error
+
+104
+00:06:04,320 --> 00:06:07,683
+is an instance of the error class.
+
+105
+00:06:09,000 --> 00:06:12,040
+This is another operator that's built into JavaScript
+
+106
+00:06:12,040 --> 00:06:15,540
+and that can be used to get through
+
+107
+00:06:15,540 --> 00:06:18,870
+if error is based on this error class,
+
+108
+00:06:18,870 --> 00:06:22,533
+which is built into JavaScript or @false@ if it's not.
+
+109
+00:06:23,970 --> 00:06:26,190
+And that would then also allow us
+
+110
+00:06:26,190 --> 00:06:29,463
+to access the message @property@ in a safe way.
+
+111
+00:06:30,690 --> 00:06:32,580
+And that's arguably the cleaner way.
+
+112
+00:06:32,580 --> 00:06:34,653
+So I'll use this approach here.
+
+113
+00:06:36,300 --> 00:06:39,570
+With that, we can then use this error @state@
+
+114
+00:06:39,570 --> 00:06:43,503
+to show an error message on the screen if we have an error.
+
+115
+00:06:44,940 --> 00:06:47,680
+So therefore we can, for example here check
+
+116
+00:06:48,744 --> 00:06:52,230
+if error is truthy, because keep in mind
+
+117
+00:06:52,230 --> 00:06:56,973
+that initially error is @undefined@, which would be falsey.
+
+118
+00:06:58,020 --> 00:06:59,995
+So if it's a @string@ if it has some content,
+
+119
+00:06:59,995 --> 00:07:02,520
+it will be truthy.
+
+120
+00:07:02,520 --> 00:07:05,850
+And if that's the case, content should be set equal
+
+121
+00:07:05,850 --> 00:07:09,300
+to that special error message @component@,
+
+122
+00:07:09,300 --> 00:07:12,090
+which I already prepared for you,
+
+123
+00:07:12,090 --> 00:07:13,803
+which wants a text @prop@.
+
+124
+00:07:16,890 --> 00:07:20,433
+So here we can set content equal to ErrorMessage.
+
+125
+00:07:22,320 --> 00:07:25,653
+For that of course you must @import@ this @component@.
+
+126
+00:07:28,380 --> 00:07:33,380
+And then here we can set the text @prop@ to error like this.
+
+127
+00:07:36,630 --> 00:07:39,990
+And with that we should also be handling errors.
+
+128
+00:07:39,990 --> 00:07:42,990
+So if we now deliberately break the app
+
+129
+00:07:42,990 --> 00:07:47,340
+by sending the request to an endpoint that doesn't exist
+
+130
+00:07:47,340 --> 00:07:49,530
+and we then save this.
+
+131
+00:07:49,530 --> 00:07:53,673
+If I reload here, I get this error box.
+
+132
+00:07:54,570 --> 00:07:56,700
+So that works as intended.
+
+133
+00:07:56,700 --> 00:07:58,800
+And of course if we go back
+
+134
+00:07:58,800 --> 00:08:03,450
+to the valid API endpoint again slash posts
+
+135
+00:08:03,450 --> 00:08:05,850
+and we then save this and reload
+
+136
+00:08:05,850 --> 00:08:08,970
+we got those posts again and the error is gone.
+
+137
+00:08:08,970 --> 00:08:12,483
+And there also is no error here in the console.
 
