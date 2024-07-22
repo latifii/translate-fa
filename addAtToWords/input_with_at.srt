@@ -1,548 +1,576 @@
 1
-00:00:00,000 --> 00:00:02,291
-[Maximilian Schwarzmüller] So we're able
+00:00:00,300 --> 00:00:02,850
+So let's now finish this app by making sure
 
 2
-00:00:02,291 --> 00:00:04,260
-to fetch our posts here.
+00:00:02,850 --> 00:00:06,513
+that when we open the cart we also show the cart items here.
 
 3
-00:00:04,260 --> 00:00:06,060
-But of course, in reality
+00:00:08,280 --> 00:00:12,540
+Now, for that we need to go to the CartItems tsx file
 
 4
-00:00:06,060 --> 00:00:09,690
-this is not always going to be super fast.
+00:00:12,540 --> 00:00:15,180
+because that's the place where those cart items
 
 5
-00:00:09,690 --> 00:00:12,360
-We might need to wait for our backend
+00:00:15,180 --> 00:00:16,082
+should be output.
 
 6
-00:00:12,360 --> 00:00:15,000
-for a couple of milliseconds or seconds
+00:00:16,980 --> 00:00:20,070
+And indeed, there already is some code in here,
 
 7
-00:00:15,000 --> 00:00:16,770
-and therefore we might want to show
+00:00:20,070 --> 00:00:22,860
+which at the moment just is commented out
 
 8
-00:00:16,770 --> 00:00:19,710
-some loading fallback text
+00:00:22,860 --> 00:00:25,050
+and needs to be tweaked a little bit,
 
 9
-00:00:19,710 --> 00:00:22,500
-whilst we're waiting for a response.
+00:00:25,050 --> 00:00:27,870
+needs to be edited a little bit.
 
 10
-00:00:22,500 --> 00:00:25,290
-And of course things can also go wrong.
+00:00:27,870 --> 00:00:30,570
+Most importantly in here,
 
 11
-00:00:25,290 --> 00:00:28,743
-And I want to handle these two scenarios as well, therefore.
+00:00:30,570 --> 00:00:34,600
+we should start by also calling useCartSelector
 
 12
-00:00:29,760 --> 00:00:32,340
-Now let's start with the loading state.
+00:00:36,780 --> 00:00:38,433
+to get our cart items.
 
 13
-00:00:32,340 --> 00:00:33,360
-To handle that,
+00:00:39,270 --> 00:00:40,950
+As mentioned in the last lecture,
 
 14
-00:00:33,360 --> 00:00:36,483
-we can add a new state to that component,
+00:00:40,950 --> 00:00:44,970
+here we have to pass a function to use cartSelector
 
 15
-00:00:37,320 --> 00:00:40,830
-a new state with help of the useState hook of course,
+00:00:44,970 --> 00:00:48,570
+and we'll automatically get the latest state snapshot
 
 16
-00:00:40,830 --> 00:00:43,491
-which is our isFetching state,
+00:00:48,570 --> 00:00:51,270
+and then we can access the cart slice
 
 17
-00:00:43,491 --> 00:00:45,663
-which we update with setIsFetching.
+00:00:51,270 --> 00:00:52,900
+and then there are the items
 
 18
-00:00:48,030 --> 00:00:50,043
-And initially that should be false,
+00:00:54,270 --> 00:00:56,733
+and that then gives us the cart items.
 
 19
-00:00:51,390 --> 00:00:54,960
-but of course here inside of fetchPosts
+00:00:58,890 --> 00:01:01,530
+With those cart items being fetched here,
 
 20
-00:00:54,960 --> 00:00:56,730
-in that effect function,
+00:01:01,530 --> 00:01:04,742
+we can comment in this code,
 
 21
-00:00:56,730 --> 00:00:59,860
-right at the start, we wanna call setIsFetching
+00:01:07,530 --> 00:01:12,010
+get rid of these comments here like this
 
 22
-00:01:01,290 --> 00:01:02,940
-and set that to true
+00:01:14,100 --> 00:01:17,280
+and we map through the cart items here.
 
 23
-00:01:02,940 --> 00:01:04,940
-because we're sending that request here.
+00:01:17,280 --> 00:01:20,340
+This code is already there and should work just fine.
 
 24
-00:01:06,450 --> 00:01:09,430
-Of course, we then also wanna setIsFetching
+00:01:20,340 --> 00:01:24,060
+I'm also outputting the price here, the title, the id
 
 25
-00:01:10,470 --> 00:01:13,443
-back to false once we're done here at the end.
+00:01:24,060 --> 00:01:27,480
+and then here for these buttons I'm trying
 
 26
-00:01:16,050 --> 00:01:18,902
-And then with setIsFetching being called
+00:01:27,480 --> 00:01:31,830
+to call functions that don't exist and I'm passing
 
 27
-00:01:18,902 --> 00:01:21,630
-and being set to true or false,
+00:01:31,830 --> 00:01:34,740
+some data to these functions as you see.
 
 28
-00:01:21,630 --> 00:01:23,910
-we can go to the component function
+00:01:34,740 --> 00:01:38,550
+The idea of the item that should be removed or reduced
 
 29
-00:01:23,910 --> 00:01:28,910
-and change the value of content if we're currently fetching.
+00:01:38,550 --> 00:01:41,370
+in the cart and the entire item
 
 30
-00:01:29,340 --> 00:01:34,340
-So we can check if isFetching is true,
+00:01:41,370 --> 00:01:43,683
+that should be added or increased.
 
 31
-00:01:34,620 --> 00:01:39,270
-and in that case set content equal to a paragraph
+00:01:45,210 --> 00:01:48,330
+Down here we also have a formatted total price,
 
 32
-00:01:39,270 --> 00:01:42,600
-with an id of loading dash fallback
+00:01:48,330 --> 00:01:49,683
+which we need to add.
 
 33
-00:01:42,600 --> 00:01:45,843
-because I prepared some styles for that id.
+00:01:50,580 --> 00:01:52,320
+And I'll actually start with that
 
 34
-00:01:46,890 --> 00:01:50,763
-And here we could then say fetchingPosts dot, dot dot.
+00:01:52,320 --> 00:01:55,140
+because that's relatively straightforward.
 
 35
-00:01:53,730 --> 00:01:57,900
-And we can see this in action if we go back to our page
+00:01:55,140 --> 00:01:58,930
+We can simply create a new formatted total price constant
 
 36
-00:01:57,900 --> 00:02:01,050
-and open the developer tools.
+00:01:59,850 --> 00:02:03,630
+and the value then should be the total price
 
 37
-00:02:01,050 --> 00:02:04,323
-And then there, if you go to the network tab,
+00:02:03,630 --> 00:02:06,990
+of all cart items formatted such that we only
 
 38
-00:02:05,430 --> 00:02:08,910
-because there in Chrome you can throttle the network
+00:02:06,990 --> 00:02:09,240
+have two decimal places.
 
 39
-00:02:08,910 --> 00:02:11,163
-and simulate a slower network.
+00:02:09,240 --> 00:02:14,240
+So for that, I'll first of all get my total price by going
 
 40
-00:02:12,300 --> 00:02:15,333
-For example, by simulating slow 3G.
+00:02:14,827 --> 00:02:18,570
+through all the cart items with help of the reduce method
 
 41
-00:02:16,770 --> 00:02:19,320
-If you do that and you then reload,
+00:02:18,570 --> 00:02:22,530
+which we saw in action in the last lecture as well.
 
 42
-00:02:19,320 --> 00:02:21,826
-it will take some time to fetch that data
+00:02:22,530 --> 00:02:26,190
+This time I'm not trying to get the total quantity,
 
 43
-00:02:21,826 --> 00:02:24,990
-because during development all these code files
+00:02:26,190 --> 00:02:27,573
+but the total price.
 
 44
-00:02:24,990 --> 00:02:27,810
-are extremely big and not optimized.
+00:02:28,890 --> 00:02:31,023
+He general idea is the same though.
 
 45
-00:02:27,810 --> 00:02:31,420
-But then you'll see that fetching post text at least briefly
+00:02:31,890 --> 00:02:35,550
+We have a starting value of zero and then we get
 
 46
-00:02:32,910 --> 00:02:36,363
-and with that, I'll disable throttling.
+00:02:35,550 --> 00:02:39,870
+the current value and the item in this function
 
 47
-00:02:37,890 --> 00:02:42,420
-But this loading text therefore is shown as intended.
+00:02:39,870 --> 00:02:43,620
+and the return value is the current value
 
 48
-00:02:42,420 --> 00:02:45,000
-Now to conclude this example,
+00:02:43,620 --> 00:02:48,620
+plus item.price times item.quantity.
 
 49
-00:02:45,000 --> 00:02:48,300
-I also want to implement error handling
+00:02:52,590 --> 00:02:55,710
+And then we can use this total price here
 
 50
-00:02:48,300 --> 00:02:50,790
-so that if sending this request fails,
+00:02:55,710 --> 00:03:00,710
+to call toFixed 2 on it to limit it to two decimal places.
 
 51
-00:02:50,790 --> 00:02:52,680
-the app doesn't simply break,
+00:03:03,240 --> 00:03:05,970
+I also want to add a dollar sign in front of it
 
 52
-00:02:52,680 --> 00:02:56,073
-but we instead shows error message to the user.
+00:03:05,970 --> 00:03:09,843
+so therefore down here I'll also add such a dollar sign.
 
 53
-00:02:57,570 --> 00:03:00,450
-Now since we're using this utility function,
+00:03:11,730 --> 00:03:14,430
+And with that we should be creating
 
 54
-00:03:00,450 --> 00:03:05,220
-which will throw an error if we get back an error response,
+00:03:14,430 --> 00:03:16,953
+and outputting that formatted total price.
 
 55
-00:03:05,220 --> 00:03:09,690
-all we have to do is wrap this get call here
+00:03:18,600 --> 00:03:20,950
+Of course, now we need the handleRemoveFromCart
 
 56
-00:03:09,690 --> 00:03:11,913
-into a try catch block,
+00:03:22,021 --> 00:03:24,570
+and the handleAddToCart functions here
 
 57
-00:03:14,730 --> 00:03:17,253
-like this where we catch an error.
+00:03:24,570 --> 00:03:26,343
+to get rid of these errors.
 
 58
-00:03:18,930 --> 00:03:20,867
-Of course the code that depends
+00:03:27,510 --> 00:03:29,710
+So therefore I'll start with handleAddToCart
 
 59
-00:03:20,867 --> 00:03:24,090
-on the success of this fetch request
+00:03:31,201 --> 00:03:32,850
+and I'll add such a function here
 
 60
-00:03:24,090 --> 00:03:28,110
-also should go into the tri block now though.
+00:03:32,850 --> 00:03:36,420
+as a nested function in this cart items component
 
 61
-00:03:28,110 --> 00:03:31,230
-So here where we update the fetched posts
+00:03:36,420 --> 00:03:39,603
+as we have done it many times before in this course.
 
 62
-00:03:31,230 --> 00:03:33,063
-that should also go in there.
+00:03:41,610 --> 00:03:45,210
+This will then receive a item as an argument,
 
 63
-00:03:34,620 --> 00:03:38,460
-This code here where we set isFetching back to false,
+00:03:45,210 --> 00:03:46,380
+as a parameter,
 
 64
-00:03:38,460 --> 00:03:42,000
-should however, stay outside of the try-catch block
+00:03:46,380 --> 00:03:51,380
+and that item will be a cart item as you can see down there.
 
 65
-00:03:42,000 --> 00:03:45,120
-because no matter if we got an error or not,
+00:03:54,180 --> 00:03:57,280
+Therefore the type should be CartItem
 
 66
-00:03:45,120 --> 00:03:47,130
-we're not fetching anymore.
+00:03:59,483 --> 00:04:02,310
+and that's a type which I defined before
 
 67
-00:03:47,130 --> 00:03:50,403
-Therefore this should definitely be set to false again.
+00:04:02,310 --> 00:04:04,653
+in the cartSlice TS file.
 
 68
-00:03:52,650 --> 00:03:54,600
-And it's now here in the catch block
+00:04:05,610 --> 00:04:08,640
+There I have such a CartItem type
 
 69
-00:03:54,600 --> 00:03:56,793
-where the error should be handled.
+00:04:08,640 --> 00:04:12,310
+and therefore all we have to do is export it
 
 70
-00:03:58,200 --> 00:04:03,200
-For this we can add a third state, an error state,
+00:04:13,170 --> 00:04:15,663
+by adding the export keyword in front of it.
 
 71
-00:04:05,190 --> 00:04:10,190
-which I'll name error and setError state updating function.
+00:04:17,339 --> 00:04:19,500
+And then back in CartItems
 
 72
-00:04:12,570 --> 00:04:16,800
-And this should eventually be a string, or undefined,
+00:04:19,500 --> 00:04:24,500
+we can easily import it like this from cart-slice.ts.
 
 73
-00:04:16,800 --> 00:04:18,483
-which is the initial value.
+00:04:32,010 --> 00:04:34,830
+So that's the handleAddToCart function.
 
 74
-00:04:21,570 --> 00:04:24,180
-And then here in the catch block,
+00:04:34,830 --> 00:04:38,343
+In this function, we of course wanna dispatch an action.
 
 75
-00:04:24,180 --> 00:04:28,750
-we can set this error state by calling set error
+00:04:39,930 --> 00:04:44,400
+Therefore we need this useCartDispatch hook
 
 76
-00:04:29,940 --> 00:04:34,830
-and we can set it to a message like failed to fetch posts
+00:04:44,400 --> 00:04:46,983
+which is also imported from this hooks file.
 
 77
-00:04:34,830 --> 00:04:35,663
-like this.
+00:04:48,330 --> 00:04:51,273
+And we need the action that should be dispatched.
 
 78
-00:04:38,400 --> 00:04:40,350
-We could also use the message
+00:04:52,200 --> 00:04:55,770
+We can import those actions from the cart-slice ts file,
 
 79
-00:04:40,350 --> 00:04:42,630
-of the error that's being thrown.
+00:04:55,770 --> 00:04:59,970
+of course, because that's where we're exporting them.
 
 80
-00:04:42,630 --> 00:04:45,000
-So for example of this error
+00:04:59,970 --> 00:05:03,360
+I am talking about these action creator functions
 
 81
-00:04:45,000 --> 00:04:47,913
-where the message would be failed to fetch data.
+00:05:03,360 --> 00:05:04,443
+to be precise.
 
 82
-00:04:48,900 --> 00:04:52,104
-Now for that we have to access this error object
+00:05:06,660 --> 00:05:10,830
+So here we need to import the addToCart
 
 83
-00:04:52,104 --> 00:04:54,660
-that's being caught here
+00:05:10,830 --> 00:05:13,860
+and the removeFromCart action creators
 
 84
-00:04:54,660 --> 00:04:58,470
-and use that in our set error state updating call.
+00:05:13,860 --> 00:05:15,123
+because we'll need both.
 
 85
-00:04:58,470 --> 00:05:01,323
-And for example, set this to error.message.
+00:05:16,290 --> 00:05:19,680
+And CartItem is a type, by the way, so we can add
 
 86
-00:05:02,820 --> 00:05:06,270
-The problem with that just is that error by default
+00:05:19,680 --> 00:05:22,833
+this annotation to optimize our imports.
 
 87
-00:05:06,270 --> 00:05:07,800
-is of type unknown
+00:05:24,060 --> 00:05:26,200
+Now with all those imports added
 
 88
-00:05:07,800 --> 00:05:11,520
-because TypeScript doesn't know what it's catching here.
+00:05:27,419 --> 00:05:30,000
+and with useCartDispatch being called here,
 
 89
-00:05:11,520 --> 00:05:15,720
-In JavaScript, you can throw anything as an error
+00:05:30,000 --> 00:05:34,290
+we'll get back a dispatch function from that hook.
 
 90
-00:05:15,720 --> 00:05:18,993
-including numbers, strings, anything.
+00:05:34,290 --> 00:05:36,510
+And we can now use this function here
 
 91
-00:05:19,890 --> 00:05:21,630
-So TypeScript doesn't know
+00:05:36,510 --> 00:05:38,793
+in the handleAddToCart function.
 
 92
-00:05:21,630 --> 00:05:24,510
-what type of value it will get here
+00:05:40,230 --> 00:05:43,770
+And the action object that should be dispatched
 
 93
-00:05:24,510 --> 00:05:27,930
-and therefore we either have to add some checks here
+00:05:43,770 --> 00:05:45,450
+will be created by
 
 94
-00:05:27,930 --> 00:05:32,610
-and check if error, for example has a certain property
+00:05:45,450 --> 00:05:48,873
+this addToCart action creator function here.
 
 95
-00:05:32,610 --> 00:05:36,880
-or if the type of error, for example
+00:05:50,070 --> 00:05:51,870
+We just execute it.
 
 96
-00:05:37,913 --> 00:05:40,110
-is string or something like this.
+00:05:51,870 --> 00:05:55,110
+And then this in the end wants an object with an id,
 
 97
-00:05:40,110 --> 00:05:41,670
-We can do all of that,
+00:05:55,110 --> 00:05:56,940
+title, and price.
 
 98
-00:05:41,670 --> 00:05:43,620
-but for this application here,
+00:05:56,940 --> 00:05:59,080
+So in the end we can pass our item here
 
 99
-00:05:43,620 --> 00:05:47,370
-we know that it will be an error object.
+00:06:00,750 --> 00:06:04,410
+because this cartItem has all that information.
 
 100
-00:05:47,370 --> 00:05:51,300
-Therefore we can also just use type casting here
+00:06:04,410 --> 00:06:07,980
+It actually also has a property which is not needed
 
 101
-00:05:51,300 --> 00:05:55,143
-and tell TypeScript that this will be of type error.
+00:06:07,980 --> 00:06:12,033
+by addToCart, but TypeScript has no problem with that here.
 
 102
-00:05:57,390 --> 00:06:00,960
-Alternatively, and a bit cleaner,
+00:06:13,560 --> 00:06:17,520
+Therefore, we can now also add this other missing function
 
 103
-00:06:00,960 --> 00:06:04,320
-we could add an if check and check if error
+00:06:17,520 --> 00:06:21,363
+the handleRemoveFromCart function like this.
 
 104
-00:06:04,320 --> 00:06:07,683
-is an instance of the error class.
+00:06:22,920 --> 00:06:26,733
+And here we just get the item id, which is of type string.
 
 105
-00:06:09,000 --> 00:06:12,040
-This is another operator that's built into JavaScript
+00:06:27,660 --> 00:06:30,873
+So therefore here we should accept such an id.
 
 106
-00:06:12,040 --> 00:06:15,540
-and that can be used to get through
+00:06:32,820 --> 00:06:37,110
+And then dispatch another action where we use
 
 107
-00:06:15,540 --> 00:06:18,870
-if error is based on this error class,
+00:06:37,110 --> 00:06:40,533
+the removeFromCart action creator function.
 
 108
-00:06:18,870 --> 00:06:22,533
-which is built into JavaScript or false if it's not.
+00:06:41,820 --> 00:06:45,240
+And that function wants one argument
 
 109
-00:06:23,970 --> 00:06:26,190
-And that would then also allow us
+00:06:45,240 --> 00:06:47,043
+which should be of type string.
 
 110
-00:06:26,190 --> 00:06:29,463
-to access the message property in a safe way.
+00:06:48,420 --> 00:06:51,300
+Therefore it's simply that id that's passed
 
 111
-00:06:30,690 --> 00:06:32,580
-And that's arguably the cleaner way.
+00:06:51,300 --> 00:06:52,773
+to remove from cart.
 
 112
-00:06:32,580 --> 00:06:34,653
-So I'll use this approach here.
+00:06:54,120 --> 00:06:57,540
+And that should, in general, be all.
 
 113
-00:06:36,300 --> 00:06:39,570
-With that, we can then use this error state
+00:06:57,540 --> 00:07:01,320
+However, I still wanna fine tune the JSX code here
 
 114
-00:06:39,570 --> 00:06:43,503
-to show an error message on the screen if we have an error.
+00:07:01,320 --> 00:07:04,840
+and for example, only output this message here
 
 115
-00:06:44,940 --> 00:06:47,680
-So therefore we can, for example here check
+00:07:05,982 --> 00:07:08,073
+if we really have no items in the cart.
 
 116
-00:06:48,744 --> 00:06:52,230
-if error is truthy, because keep in mind
+00:07:09,390 --> 00:07:14,390
+So here we can check if cart items length is equal to zero
 
 117
-00:06:52,230 --> 00:06:56,973
-that initially error is undefined, which would be falsey.
+00:07:14,640 --> 00:07:18,183
+and if that's the case, this paragraph will be output.
 
 118
-00:06:58,020 --> 00:06:59,995
-So if it's a string if it has some content,
+00:07:19,680 --> 00:07:22,560
+Similarly, down here, we want to check
 
 119
-00:06:59,995 --> 00:07:02,520
-it will be truthy.
+00:07:22,560 --> 00:07:25,750
+if cart items length is greater than zero
 
 120
-00:07:02,520 --> 00:07:05,850
-And if that's the case, content should be set equal
+00:07:26,910 --> 00:07:30,570
+like this and only output this on our list
 
 121
-00:07:05,850 --> 00:07:09,300
-to that special error message component,
+00:07:30,570 --> 00:07:32,463
+if that's the case.
 
 122
-00:07:09,300 --> 00:07:12,090
-which I already prepared for you,
+00:07:33,750 --> 00:07:37,203
+The closing curly brace goes here.
 
 123
-00:07:12,090 --> 00:07:13,803
-which wants a text prop.
+00:07:39,390 --> 00:07:43,110
+So, therefore with that we can now save this,
 
 124
-00:07:16,890 --> 00:07:20,433
-So here we can set content equal to ErrorMessage.
+00:07:43,110 --> 00:07:48,110
+go back, reload, and add some items to the cart
 
 125
-00:07:22,320 --> 00:07:25,653
-For that of course you must import this component.
+00:07:49,290 --> 00:07:53,010
+and then also open the cart and we can see those items here
 
 126
-00:07:28,380 --> 00:07:33,380
-And then here we can set the text prop to error like this.
+00:07:53,010 --> 00:07:55,740
+and we can now also edit those items
 
 127
-00:07:36,630 --> 00:07:39,990
-And with that we should also be handling errors.
+00:07:55,740 --> 00:07:58,500
+from inside the cart, remove them,
 
 128
-00:07:39,990 --> 00:07:42,990
-So if we now deliberately break the app
+00:07:58,500 --> 00:08:03,500
+increase them in quantity, and do all these things.
 
 129
-00:07:42,990 --> 00:07:47,340
-by sending the request to an endpoint that doesn't exist
+00:08:03,510 --> 00:08:06,720
+And therefore, with that, we did now successfully
 
 130
-00:07:47,340 --> 00:07:49,530
-and we then save this.
+00:08:06,720 --> 00:08:10,050
+also build an application that uses Redux
 
 131
-00:07:49,530 --> 00:07:53,673
-If I reload here, I get this error box.
+00:08:10,050 --> 00:08:13,980
+and, of course, TypeScript, because that's the main topic
 
 132
-00:07:54,570 --> 00:07:56,700
-So that works as intended.
+00:08:13,980 --> 00:08:17,760
+of this course, TypeScript with React.
 
 133
-00:07:56,700 --> 00:07:58,800
-And of course if we go back
+00:08:17,760 --> 00:08:19,140
+But as you can tell
 
 134
-00:07:58,800 --> 00:08:03,450
-to the valid API endpoint again slash posts
+00:08:19,140 --> 00:08:22,800
+there wasn't too much TypeScript-specific work
 
 135
-00:08:03,450 --> 00:08:05,850
-and we then save this and reload
+00:08:22,800 --> 00:08:24,840
+that had to be done.
 
 136
-00:08:05,850 --> 00:08:08,970
-we got those posts again and the error is gone.
+00:08:24,840 --> 00:08:28,800
+Most importantly, we had to set up these special types
 
 137
-00:08:08,970 --> 00:08:12,483
-And there also is no error here in the console.
+00:08:28,800 --> 00:08:33,330
+and hooks to get the best possible TypeScript support
+
+138
+00:08:33,330 --> 00:08:37,020
+when selecting data and dispatching actions.
+
+139
+00:08:37,020 --> 00:08:39,720
+But that was almost all.
+
+140
+00:08:39,720 --> 00:08:42,750
+Sure, we also set up our state type here
+
+141
+00:08:42,750 --> 00:08:47,010
+and we used this special PayloadAction type here
+
+142
+00:08:47,010 --> 00:08:50,880
+to get better TypeScript support with that action.
+
+143
+00:08:50,880 --> 00:08:55,080
+But other than that, we really just used Redux
+
+144
+00:08:55,080 --> 00:08:58,533
+as you would use it in any React project.
 
